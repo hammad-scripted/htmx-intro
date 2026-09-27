@@ -1,0 +1,43 @@
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="eyebrow-line"></span> YOUR LITTLE CORNER OF THE WEB</p>
+    <h1 id="page-title">A clearer view of <span>what’s in motion.</span></h1>
+    <p class="hero-description">Keep your product ideas together, add new ones as they arrive, and let the small details find their place.</p>
+    <a class="text-link" href="{% url 'about' %}" hx-get="{% url 'about' %}" hx-target="#main-content" hx-push-url="true">
+      Get to know us <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <aside class="note-card" aria-label="A note about this workspace">
+    <span class="note-icon" aria-hidden="true">✳</span>
+    <p class="note-label">A small reminder</p>
+    <p class="note-copy">Good work grows one thoughtful addition at a time.</p>
+    <span class="note-rule"></span>
+    <span class="note-meta">TAKE YOUR TIME <span>✦</span></span>
+  </aside>
+</section>
+
+<section class="workspace-grid" aria-label="Product workspace">
+  <div class="catalog-column">
+    {% include "partials/products-region.html" %}
+  </div>
+
+  <aside class="add-card">
+    <div class="card-icon" aria-hidden="true">＋</div>
+    <p class="eyebrow">MAKE ROOM FOR AN IDEA</p>
+    <h2>Add a product</h2>
+    <p class="card-description">Give your next idea a name. You can refine the details whenever you’re ready.</p>
+    <form class="product-form" method="post" action="{% url 'product-create' %}" hx-post="{% url 'product-create' %}" hx-target="#product-feedback" hx-swap="outerHTML" hx-on::after-request="if (event.detail.xhr.responseText.includes('is-success')) this.reset()">
+      {% csrf_token %}
+      <input type="hidden" name="page" value="{{ page }}" />
+      <label for="product-name">Product name</label>
+      <div class="input-row">
+        <input id="product-name" name="product" type="text" maxlength="120" placeholder="e.g. Sunday Journal" autocomplete="off" required />
+        <button class="button button-primary" type="submit" aria-label="Add product"><span aria-hidden="true">＋</span></button>
+      </div>
+      <p class="field-hint">Up to 120 characters</p>
+      <div id="product-feedback" class="form-feedback" aria-live="polite">{{ form_error }}</div>
+    </form>
+    <div class="card-footer"><span class="mini-sparkle" aria-hidden="true">✳</span> Ideas look good here.</div>
+  </aside>
+</section>

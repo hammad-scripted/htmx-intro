@@ -1,0 +1,7 @@
+<section class="about-page">
+  <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE ABOUT US</p>
+  <h1>Make space for <span>good ideas.</span></h1>
+  <p class="about-copy">Fieldnotes is a small, welcoming place to keep track of the products and ideas you’re bringing to life. This demo pairs Django’s dependable foundations with HTMX’s quick, focused page updates.</p>
+  <p class="about-copy about-detail">Add an idea in the workspace and it’s saved to the database. Browse the collection with “Show more”; each update happens in place, without a full page reload.</p>
+  <a class="button button-secondary" href="{% url 'index' %}" hx-get="{% url 'index' %}" hx-target="#main-content" hx-push-url="true">Back to your workspace <span aria-hidden="true">→</span></a>
+</section>

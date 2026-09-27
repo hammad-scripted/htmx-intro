@@ -1,0 +1,35 @@
+<section id="products-region" class="catalog-card" aria-labelledby="products-heading"{% if oob %} hx-swap-oob="outerHTML"{% endif %}>
+  <div class="catalog-heading">
+    <div>
+      <p class="eyebrow">YOUR COLLECTION</p>
+      <h2 id="products-heading">Products <span class="count-badge">{{ total_products }}</span></h2>
+    </div>
+    <span class="catalog-caption">A good place to begin</span>
+  </div>
+
+  <div class="table-wrap">
+    <table class="product-table">
+      <thead>
+        <tr><th scope="col">REF.</th><th scope="col">PRODUCT</th><th scope="col">STATUS</th></tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          {% include "product-row.html" with product=product %}
+        {% empty %}
+          <tr><td class="empty-state" colspan="3">Nothing here yet. Add your first product to get started.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if has_more %}
+    <div class="catalog-actions">
+      <a class="button button-load" href="{% url 'products' %}?page={{ next_page }}" hx-get="{% url 'products' %}?page={{ next_page }}" hx-target="#products-region" hx-swap="outerHTML" hx-indicator="#load-more-indicator">
+        Show more <span aria-hidden="true">↓</span>
+      </a>
+      <span id="load-more-indicator" class="loading-label htmx-indicator">Gathering products…</span>
+    </div>
+  {% else %}
+    <p class="catalog-end">You’re all caught up <span aria-hidden="true">✳</span></p>
+  {% endif %}
+</section>

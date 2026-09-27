@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>{% block title %}Fieldnotes · Django + HTMX{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.11/dist/htmx.min.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="{% url 'index' %}" hx-get="{% url 'index' %}" hx-target="#main-content" hx-push-url="true" aria-label="Fieldnotes home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span>fieldnotes<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="{% url 'index' %}" hx-get="{% url 'index' %}" hx-target="#main-content" hx-push-url="true">Workspace</a>
+          <a href="{% url 'about' %}" hx-get="{% url 'about' %}" hx-target="#main-content" hx-push-url="true">About</a>
+        </nav>
+        <span class="status-pill"><span class="status-dot"></span> All systems ready</span>
+      </header>
+
+      <main id="main-content" class="main-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer class="site-footer">
+        <span>Made for the things you’re building.</span>
+        <span>Django <span aria-hidden="true">·</span> HTMX</span>
+      </footer>
+    </div>
+  </body>
+</html>
